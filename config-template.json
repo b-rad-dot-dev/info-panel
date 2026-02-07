@@ -1,0 +1,17 @@
+{
+  "gridWidth": 1,
+  "gridHeight": 1,
+  "modules": [
+    {
+      "name": "clock",
+      "width": 1,
+      "height": 1,
+      "x": 0,
+      "y": 0,
+      "config": {
+        "arbitrary": "config",
+        "passed-to": "module"
+      }
+    }
+  ]
+}
