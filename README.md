@@ -22,3 +22,81 @@ The following are convenience scripts to get up and running locally:
 * `build.bat` - Builds the latest version of the docker image
 * `run.bat` - Runs the docker image against this repository (assumes there is a `config.json` file
   and `modules/` directory both at the root)
+
+---
+
+A flexible, grid-based dashboard system designed for small displays (like 8.8" monitors). Features automatic live-reload when configuration changes are detected.
+
+## Features
+
+- **Grid-based layout** - Define custom grid dimensions and place modules anywhere
+- **Live reload** - Automatically updates when `config.json` is modified
+- **Modular architecture** - Easy to add custom modules
+- **Minimal design** - Optimized for small screen real estate
+- **Local storage** - Data persists across sessions
+
+## Installation
+
+```bash
+cd dashboard-app
+npm install
+```
+
+## Running the Application
+
+```bash
+npm start
+```
+
+Or for development with auto-restart:
+
+```bash
+npm run dev
+```
+
+The dashboard will be available at `http://localhost:3000`
+
+## Configuration
+
+The dashboard is configured via `config.json` in the root directory. The application watches this file and automatically reloads the UI when changes are detected.
+
+### Configuration Structure
+
+```json
+{
+  "gridWidth": 4,
+  "gridHeight": 3,
+  "modules": [
+    {
+      "name": "module-name",
+      "width": 1,
+      "height": 1,
+      "x": 0,
+      "y": 0,
+      "config": {}
+    }
+  ]
+}
+```
+
+### Grid Properties
+
+- `gridWidth` - Number of columns in the grid
+- `gridHeight` - Number of rows in the grid
+
+### Module Properties
+
+- `name` - Module folder name (e.g., "todo-list", "notes")
+- `width` - Number of grid columns the module spans
+- `height` - Number of grid rows the module spans
+- `x` - Starting column (0-indexed)
+- `y` - Starting row (0-indexed)
+- `config` - Module-specific configuration object
+
+### Custom Config Path
+
+Set a custom config file location via environment variable:
+
+```bash
+CONFIG_PATH=/path/to/my/config.json npm start
+```
