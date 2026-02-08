@@ -27,6 +27,16 @@ The following are convenience scripts to get up and running locally:
 
 A flexible, grid-based dashboard system designed for small displays (like 8.8" monitors). Features automatic live-reload when configuration changes are detected.
 
+## Screenshot
+
+Sample screenshot showcasing Info Panel Modules
+![Screenshot 1](screenshot-provided.png)
+Included (from left to right):
+* [IPM Todo List](https://github.com/b-rad-dot-dev/ipm-todo-list)
+* [IPM Notes](https://github.com/b-rad-dot-dev/ipm-notes)
+* [IPM Cadence](https://github.com/b-rad-dot-dev/ipm-cadence)
+* [IPM Clock](https://github.com/b-rad-dot-dev/ipm-clock)
+
 ## Features
 
 - **Grid-based layout** - Define custom grid dimensions and place modules anywhere
