@@ -29,13 +29,19 @@ A flexible, grid-based dashboard system designed for small displays (like 8.8" m
 
 ## Screenshot
 
-Sample screenshot showcasing Info Panel Modules
+Some Info Panel Modules
 ![Screenshot 1](screenshot-provided.png)
 Included (from left to right):
 * [IPM Todo List](https://github.com/b-rad-dot-dev/ipm-todo-list)
 * [IPM Notes](https://github.com/b-rad-dot-dev/ipm-notes)
 * [IPM Cadence](https://github.com/b-rad-dot-dev/ipm-cadence)
 * [IPM Clock](https://github.com/b-rad-dot-dev/ipm-clock)
+
+---
+
+Edit mode for IPM Todo List / IPM Notes
+![Screenshot 2](screenshot-edit.png)
+Supports either right-click or long-press. Triple bars on the left allows drag-reordering.
 
 ## Features
 
