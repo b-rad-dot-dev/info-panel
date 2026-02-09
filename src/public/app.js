@@ -95,7 +95,9 @@ class Dashboard {
         // Initialize module
         const ModuleClass = window[this.getModuleClassName(name)];
         if (ModuleClass) {
-          const instance = new ModuleClass(content, config || {});
+          const instance = new ModuleClass(content, config || {}, {
+            log: this.log
+          });
           this.modules.set(content.id, instance);
         }
       };
@@ -112,6 +114,20 @@ class Dashboard {
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join('') + 'Module';
+  }
+
+  async log(level, module, message) {
+    return await fetch('/api/log', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        logLevel: level,
+        module: module,
+        message: message
+      })
+    });
   }
 }
 

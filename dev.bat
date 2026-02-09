@@ -1,1 +1,1 @@
-docker run --rm -it -p 3001:3000 -v "%CD%:/wd" --workdir /wd node:lts /bin/bash
+docker run --rm -it --name info-panel-dev -p 3001:3000 -v "%CD%/src:/wd" --workdir /wd node:lts /bin/bash

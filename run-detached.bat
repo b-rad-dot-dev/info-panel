@@ -1,4 +1,5 @@
 docker run --rm ^
+  -d ^
   -v "./src/config.json:/app/config.json" ^
   -v "./src/modules/:/app/modules/" ^
   -e CONFIG_PATH="/app/config.json" ^

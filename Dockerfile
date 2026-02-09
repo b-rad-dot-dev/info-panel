@@ -1,11 +1,14 @@
 FROM node:alpine
 
-COPY ./src /app
+COPY ./src/dist /app
+COPY ./src/package.json /app
+
 WORKDIR /app
-VOLUME /app/modules
 
 RUN npm i
 
+VOLUME /app/modules
+
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start-minified"]

@@ -8,20 +8,33 @@ const app = express();
 const PORT = 3000;
 const CONFIG_PATH = process.env.CONFIG_PATH || path.join(__dirname, 'config.json');
 
+app.use((req, res, next) => {
+  res.setHeader(
+      'Content-Security-Policy',
+      [
+        "default-src 'self'",
+        "connect-src 'self'",
+        "script-src 'self'",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "frame-ancestors 'none'"
+      ].join('; ')
+  );
+  next();
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/modules', express.static(path.join(__dirname, 'modules')));
 
-// API endpoint to get current config
-app.get('/api/config', (req, res) => {
-  try {
-    const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-    res.json(config);
-  } catch (error) {
-    console.error('Error reading config:', error);
-    res.status(500).json({ error: 'Failed to read config' });
-  }
-});
+// Parsing
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+require('./routes')(app)
 
 // Start HTTP server
 const server = app.listen(PORT, '0.0.0.0', () => {
