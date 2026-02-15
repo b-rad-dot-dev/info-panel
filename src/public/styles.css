@@ -11,12 +11,151 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+  position: relative;
+}
+
+#taskbar {
+  display: none; /* Hidden by default, shown when enabled */
+  position: absolute;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  z-index: 1000;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Taskbar positioning */
+#taskbar.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  border-bottom: 1px solid #2a2a2a;
+  padding: 0 8px;
+  gap: 8px;
+}
+
+#taskbar.bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  border-top: 1px solid #2a2a2a;
+  padding: 0 8px;
+  gap: 8px;
+}
+
+#taskbar.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  border-right: 1px solid #2a2a2a;
+  padding: 8px 0;
+  gap: 8px;
+}
+
+#taskbar.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  border-left: 1px solid #2a2a2a;
+  padding: 8px 0;
+  gap: 8px;
+}
+
+/* Taskbar buttons */
+.taskbar-button {
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  color: #e0e0e0;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.taskbar-button:hover {
+  background: #3a3a3a;
+}
+
+.taskbar-button:active {
+  background: #1a1a1a;
+}
+
+/* Hamburger toggle button */
+.taskbar-toggle {
+  position: absolute;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #e0e0e0;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.taskbar-toggle:hover {
+  background: #2a2a2a;
+}
+
+.taskbar-toggle:active {
+  background: #0a0a0a;
+}
+
+/* Toggle button positioning based on taskbar position */
+.taskbar-toggle.top,
+.taskbar-toggle.right {
+  top: 8px;
+  right: 8px;
+  border-radius: 3px;
+}
+
+.taskbar-toggle.bottom {
+  bottom: 8px;
+  right: 8px;
+  border-radius: 3px;
+}
+
+.taskbar-toggle.left {
+  top: 8px;
+  left: 8px;
+  border-radius: 3px;
+}
+
+/* Grid container */
+#grid-container {
+  width: 100%;
+  height: 100%;
 }
 
 #grid-container {
   display: grid;
-  /*width: 100%;*/
-  /*height: 100%;*/
+  width: 100%;
+  height: 100%;
   gap: 4px;
   padding: 4px;
   position: relative;
