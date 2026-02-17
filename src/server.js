@@ -36,6 +36,41 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 require('./routes')(app)
 
+const moduleLoader = require('./moduleLoader');
+const modules = moduleLoader.loadModules();
+let requestCounter = 0;
+
+app.all("/modules/:moduleName/:routePath", async (req, res) => {
+    const { moduleName, routePath } = req.params;
+
+    const mod = modules[moduleName];
+    if (!mod) return res.status(404).json({ error: "Module not found" });
+
+    const id = ++requestCounter;
+
+    const promise = new Promise((resolve, reject) => {
+        mod.pending.set(id, { resolve, reject });
+    });
+
+    mod.process.send({
+        id,
+        routePath: `/${routePath}`,
+        method: req.method,
+        payload: {
+            query: req.query,
+            body: req.body
+        }
+    });
+
+    try {
+        const result = await promise;
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+});
+
+
 // Start HTTP server
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Dashboard server running at http://0.0.0.0:${PORT}`);
