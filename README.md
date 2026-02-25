@@ -23,6 +23,14 @@ The following are convenience scripts to get up and running locally:
 * `run.bat` - Runs the docker image against this repository (assumes there is a `config.json` file
   and `modules/` directory both at the root)
 
+# Release
+
+* Spin up the `dev.bat` container
+* Run `npm run minify`
+* Confirm it works via either `npm run dev-prod` or by running `npm run start-minified` in the `dist/` directory
+  * The latter is what the docker image will do
+* Once confirmed working, build the docker image with `build.bat`
+
 ---
 
 A flexible, grid-based dashboard system designed for small displays (like 8.8" monitors). Features automatic live-reload when configuration changes are detected.

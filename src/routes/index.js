@@ -1,5 +1,6 @@
 const routes = {
     "config": require("./config.js"),
+    "modules": require("./modules"),
     "log": require("./log.js")
 }
 
