@@ -11,14 +11,18 @@ const init = function(app) {
             body: req.body,
         };
 
-        const { status, body } = await moduleManager.dispatch(
-            moduleName,
-            req.method,
-            subPath,
-            payload
-        );
-
-        res.status(status).json(body);
+        try {
+            const { status, body } = await moduleManager.dispatch(
+                moduleName,
+                req.method,
+                subPath,
+                payload
+            );
+            res.status(status).json(body);
+        } catch (err) {
+            console.error(`[modules route] Error dispatching to "${moduleName}${subPath}":`, err.message);
+            res.status(500).json({ error: err.message });
+        }
     });
 }
 

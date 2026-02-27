@@ -66,6 +66,7 @@ class ModuleProcess {
 
             const timer = setTimeout(() => {
                 this.pending.delete(requestId);
+                // Rejection caught in routes/modules.js
                 reject(new Error(`Module "${this.moduleName}" timed out handling ${method} ${modulePath}`));
             }, timeoutMs);
 

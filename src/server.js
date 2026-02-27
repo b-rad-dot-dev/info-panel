@@ -9,23 +9,25 @@ const app = express();
 const PORT = 3000;
 const CONFIG_PATH = process.env.CONFIG_PATH || path.join(__dirname, 'config.json');
 
-app.use((req, res, next) => {
-  res.setHeader(
-      'Content-Security-Policy',
-      [
-        "default-src 'self'",
-        "connect-src 'self'",
-        "script-src 'self'",
-        "style-src 'self' 'unsafe-inline'",
-        "img-src 'self' data:",
-        "font-src 'self'",
-        "object-src 'none'",
-        "base-uri 'self'",
-        "frame-ancestors 'none'"
-      ].join('; ')
-  );
-  next();
-});
+// Uncomment for now to allow loading things from elsewhere as modules require it. Address in the future for modules to
+// declare where they need to allow things to come from?
+// app.use((req, res, next) => {
+//   res.setHeader(
+//       'Content-Security-Policy',
+//       [
+//         "default-src 'self'",
+//         "connect-src 'self'",
+//         "script-src 'self'",
+//         "style-src 'self' 'unsafe-inline'",
+//         "img-src 'self' data:",
+//         "font-src 'self'",
+//         "object-src 'none'",
+//         "base-uri 'self'",
+//         "frame-ancestors 'none'"
+//       ].join('; ')
+//   );
+//   next();
+// });
 
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
