@@ -204,22 +204,32 @@ class Dashboard {
 
     // Load module script
     try {
-      const script = document.createElement('script');
-      script.src = `/modules/${name}/module.js`;
-      script.onload = () => {
-        // Initialize module
-        const ModuleClass = window[this.getModuleClassName(name)];
-        if (ModuleClass) {
-          const instance = new ModuleClass(content, config || {}, {
-            log: this.log
-          });
-          this.modules.set(content.id, instance);
-        }
-      };
-      document.body.appendChild(script);
+      const path = `/modules/${name}/index.js`;
+      const ModuleClass = (await import(path)).default;
+      const instance = new ModuleClass(content, config || {}, {
+        log: this.log
+      });
+      this.modules.set(content.id, instance);
     } catch (error) {
-      console.error(`Failed to load module ${name}:`, error);
-      content.innerHTML = `<p style="color: #ff6b6b;">Error loading module: ${name}</p>`;
+      // TODO: Remove this section once existing modules are converted
+      try {
+        const script = document.createElement('script');
+        script.src = `/modules/${name}/module.js`;
+        script.onload = () => {
+          // Initialize module
+          const ModuleClass = window[this.getModuleClassName(name)];
+          if (ModuleClass) {
+            const instance = new ModuleClass(content, config || {}, {
+              log: this.log
+            });
+            this.modules.set(content.id, instance);
+          }
+        };
+        document.body.appendChild(script);
+      } catch (err) {
+        console.error(`Failed to load module ${name}:`, error);
+        content.innerHTML = `<p style="color: #ff6b6b;">Error loading module: ${name}</p>`;
+      }
     }
   }
 

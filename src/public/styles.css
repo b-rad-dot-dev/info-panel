@@ -1,3 +1,18 @@
+:root {
+  --background: #1a1a1a;
+  --border: 1px solid #2a2a2a;
+
+  --component-background: #2a2a2a;
+  --component-border: 1px solid #3a3a3a;
+  --component-padding: 6px 8px;
+  --component-border-radius: 3px;
+
+  --font-color-default: #e0e0e0;
+  --font-color-secondary: #888888;
+  --font-color-primary: #4a90e2;
+  --font-size: 12px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +32,8 @@ body {
 #taskbar {
   display: none; /* Hidden by default, shown when enabled */
   position: absolute;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background: var(--background);
+  border: var(--border);
   z-index: 1000;
   user-select: none;
   -webkit-user-select: none;
@@ -33,7 +48,7 @@ body {
   left: 0;
   right: 0;
   height: 40px;
-  border-bottom: 1px solid #2a2a2a;
+  border-bottom: var(--border);
   padding: 0 8px;
   gap: 8px;
 }
@@ -46,7 +61,7 @@ body {
   left: 0;
   right: 0;
   height: 40px;
-  border-top: 1px solid #2a2a2a;
+  border-top: var(--border);
   padding: 0 8px;
   gap: 8px;
 }
@@ -59,7 +74,7 @@ body {
   left: 0;
   bottom: 0;
   width: 40px;
-  border-right: 1px solid #2a2a2a;
+  border-right: var(--border);
   padding: 8px 0;
   gap: 8px;
 }
@@ -72,7 +87,7 @@ body {
   right: 0;
   bottom: 0;
   width: 40px;
-  border-left: 1px solid #2a2a2a;
+  border-left: var(--border);
   padding: 8px 0;
   gap: 8px;
 }
@@ -96,14 +111,14 @@ body {
 }
 
 .taskbar-button:active {
-  background: #1a1a1a;
+  background: var(--background);
 }
 
 /* Hamburger toggle button */
 .taskbar-toggle {
   position: absolute;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background: var(--background);
+  border: var(--border);
   color: #e0e0e0;
   width: 40px;
   height: 40px;
@@ -154,8 +169,6 @@ body {
 
 #grid-container {
   display: grid;
-  width: 100%;
-  height: 100%;
   gap: 4px;
   padding: 4px;
   position: relative;
@@ -168,8 +181,8 @@ body {
 }
 
 .module-wrapper {
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
+  background: var(--background);
+  border: var(--border);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
@@ -189,7 +202,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -205,12 +218,13 @@ body {
 .module-content h2 {
   font-size: 14px;
   margin-bottom: 8px;
-  color: #ffffff;
+  color: var(--font-color-default);
   font-weight: 600;
 }
 
 .module-content input,
-.module-content textarea {
+.module-content textarea,
+textarea {
   background: #2a2a2a;
   border: 1px solid #3a3a3a;
   color: #e0e0e0;
