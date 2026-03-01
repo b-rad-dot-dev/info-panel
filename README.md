@@ -27,9 +27,11 @@ The following are convenience scripts to get up and running locally:
 
 * Spin up the `dev.bat` container
 * Run `npm run minify`
-* Confirm it works via either `npm run dev-prod` or by running `npm run start-minified` in the `dist/` directory
-  * The latter is what the docker image will do
-* Once confirmed working, build the docker image with `build.bat`
+* Confirm it works via first running `npm run dev-prod` (this will copy the `config.json` and `modules/` directory to
+  the dist folder)
+* Then run `node dist/server.min.js` to confirm the minified backend works
+  * The latter is essentially what the docker image will do
+* Once confirmed working, exit the `dev.bat` container and build the docker image with `build.bat`
 
 ---
 
