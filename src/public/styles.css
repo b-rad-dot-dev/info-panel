@@ -3,13 +3,26 @@
   --border: 1px solid #2a2a2a;
 
   --component-background: #2a2a2a;
+  /* TODO: component-background-hover */
+  --component-background-lighter: #333333;
+  /* TODO: component-background-darker */
   --component-border: 1px solid #3a3a3a;
   --component-padding: 6px 8px;
   --component-border-radius: 3px;
 
+  --scrollbar-base-size: 6px;
+  --scrollbar-background: var(--background);
+  --scrollbar-thumb: #3a3a3a;
+  --scrollbar-border-radius: var(--component-border-radius);
+  --scrollbar-background-hover: #4a4a4a;
+
   --font-color-default: #e0e0e0;
+  /* TODO: font-color-secondary-lighter */
+  /* TODO: font-color-secondary-darker */
   --font-color-secondary: #888888;
   --font-color-primary: #4a90e2;
+  /* TODO: font-color-primary-hover */
+  /* TODO: font-color-primary-active */
   --font-size: 12px;
 }
 
@@ -193,69 +206,4 @@ body {
   height: 100%;
   overflow: auto;
   padding: 8px;
-}
-
-/* Scrollbar styling for minimal look */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #3a3a3a;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #4a4a4a;
-}
-
-/* Common module styles */
-.module-content h2 {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: var(--font-color-default);
-  font-weight: 600;
-}
-
-.module-content input,
-.module-content textarea,
-textarea {
-  background: #2a2a2a;
-  border: 1px solid #3a3a3a;
-  color: #e0e0e0;
-  padding: 6px 8px;
-  border-radius: 3px;
-  font-size: 12px;
-  font-family: inherit;
-  width: 100%;
-}
-
-.module-content input:focus,
-.module-content textarea:focus {
-  outline: none;
-  border-color: #4a90e2;
-}
-
-.module-content button {
-  background: #3a3a3a;
-  border: 1px solid #4a4a4a;
-  color: #e0e0e0;
-  padding: 4px 8px;
-  border-radius: 3px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.module-content button:hover {
-  background: #4a4a4a;
-}
-
-.module-content button:active {
-  background: #2a2a2a;
 }
