@@ -10,7 +10,101 @@ class Dashboard {
     this.modules = new Map();
     this.ws = null;
     this.taskbarPosition = 'top';
+
+    this.createSharedStylesheet();
+
     this.init();
+  }
+
+  createSharedStylesheet() {
+    this.sharedTheme = `
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: var(--scrollbar-base-size);
+    height: var(--scrollbar-base-size);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: var(--scrollbar-border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-background-hover);
+}
+
+.container {
+    color: var(--font-color-default);
+    font-size: var(--font-size);
+}
+
+input,
+textarea {
+    border: var(--component-border);
+    color: var(--font-color-default);
+    font-size: var(--font-size);
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+input:not([type="checkbox"]),
+textarea {
+    background: var(--component-background);
+    padding: var(--component-padding);
+    border-radius: var(--component-border-radius);
+}
+
+input:not([type="checkbox"], [type="button"]),
+textarea {
+    width: 100%;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--font-color-primary);
+}
+
+input[type="checkbox"] {
+    background: var(--font-color-default);
+    width: 1em;
+    height: 1em;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+    border-radius: 2px;
+}
+
+/* Change the background color when checkbox is checked */
+input[type="checkbox"]:checked {
+    background-color: var(--font-color-primary);
+    border: 1px solid var(--font-color-primary);
+}
+
+/* Add a check mark when checked */
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    width: 3px;
+    height: 7px;
+    border-width: 0 2px 2px 0;
+    transform: rotate(40deg);
+    border-color: white;
+    border-style: solid;
+}
+`;
   }
 
   async init() {
@@ -200,13 +294,19 @@ class Dashboard {
     content.id = `module-${name}-${Date.now()}`;
     wrapper.appendChild(content);
 
+    // Create shadow dom
+    const shadow = content.attachShadow({mode: "open"});
+    const themeClone = new CSSStyleSheet();
+    themeClone.replaceSync(this.sharedTheme);
+    shadow.adoptedStyleSheets = [themeClone];
+
     this.gridContainer.appendChild(wrapper);
 
     // Load module script
     try {
       const path = `/modules/${name}/index.js`;
       const ModuleClass = (await import(path)).default;
-      const instance = new ModuleClass(content, config || {}, {
+      const instance = new ModuleClass(shadow, config || {}, {
         log: this.log
       });
       this.modules.set(content.id, instance);
